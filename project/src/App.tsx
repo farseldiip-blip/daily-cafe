@@ -217,24 +217,51 @@ function MenuPage() {
   return (
     <main className="menu-page section-shell" id="main-content">
       <section className="menu-hero">
-        <Reveal className="section-label"><span>01</span><span>Take a look</span></Reveal>
+        <Reveal className="section-label"><span>01</span><span>Menu</span></Reveal>
         <Reveal className="menu-hero__content">
           <div>
             <span className="eyebrow">Daily Cafe &amp; Market</span>
-            <h1>The menu,<br /><em>your way.</em></h1>
+            <h1>Take a<br /><em>look.</em></h1>
           </div>
           <div className="menu-hero__mark"><BrandMark /><span>Original menu artwork<br />presented as it is.</span></div>
         </Reveal>
       </section>
+      <Reveal className="menu-intro">
+        <p>Each page is captured as it is — a direct look at the menu, the mood, the moment.</p>
+      </Reveal>
       <section className="menu-display">
-        {menuImages.length > 0 ? menuImages.map((image, index) => (
-          <Reveal className="menu-image" key={image.src}>
-            <button onClick={() => openLightbox(index)} aria-label={`Enlarge menu page ${index + 1}`}>
-              <img src={image.src} alt={image.alt} loading="lazy" />
-              <span><Maximize2 size={17} /> Enlarge</span>
-            </button>
-          </Reveal>
-        )) : (
+        {menuImages.length > 0 ? (
+          <>
+            <Reveal className="menu-image-group">
+              {menuImages.slice(0, 2).map((image, index) => (
+                <Reveal className="menu-image" key={image.src}>
+                  <button onClick={() => openLightbox(index)} aria-label={`Enlarge menu page ${index + 1}`}>
+                    <img src={image.src} alt={image.alt} loading="lazy" />
+                    <span><Maximize2 size={17} /> Enlarge</span>
+                  </button>
+                </Reveal>
+              ))}
+            </Reveal>
+            <Reveal className="menu-editorial">
+              <span className="eyebrow">02</span>
+              <h2>Take your time.</h2>
+            </Reveal>
+            <Reveal className="menu-image-group">
+              {menuImages.slice(2).map((image, index) => (
+                <Reveal className="menu-image" key={image.src}>
+                  <button onClick={() => openLightbox(index + 2)} aria-label={`Enlarge menu page ${index + 3}`}>
+                    <img src={image.src} alt={image.alt} loading="lazy" />
+                    <span><Maximize2 size={17} /> Enlarge</span>
+                  </button>
+                </Reveal>
+              ))}
+            </Reveal>
+            <Reveal className="menu-editorial">
+              <span className="eyebrow">03</span>
+              <h2>Made for the everyday escape.</h2>
+            </Reveal>
+          </>
+        ) : (
           <Reveal className="menu-empty">
             <div className="menu-empty__rule" />
             <span className="eyebrow">Menu artwork</span>
@@ -260,13 +287,18 @@ function Footer({ onNavigate }: { onNavigate: (nextPage: Page) => void }) {
   return (
     <footer className="site-footer section-shell">
       <div className="site-footer__top">
-        <BrandMark light />
-        <button className="footer-arrow" onClick={() => onNavigate('home')} aria-label="Back to top"><ArrowUpRight size={22} strokeWidth={1.6} /></button>
+        <div className="site-footer__brand">
+          <Reveal><BrandMark light /></Reveal>
+          <Reveal className="site-footer__closing"><em>Your daily escape</em></Reveal>
+        </div>
+        <Reveal className="footer-arrow"><button onClick={() => onNavigate('home')} aria-label="Back to top"><ArrowUpRight size={22} strokeWidth={1.6} /></button></Reveal>
       </div>
       <div className="site-footer__bottom">
-        <span>Daily Cafe &amp; Market</span>
-        <span>Al Shahabeya Square, Damietta</span>
-        <span>Your daily escape</span>
+        <Reveal className="site-footer__meta">
+          <span>Daily Cafe &amp; Market</span>
+          <span>Al Shahabeya Square, Damietta</span>
+          <span>Your daily escape</span>
+        </Reveal>
       </div>
     </footer>
   );
